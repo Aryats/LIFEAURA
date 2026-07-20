@@ -1,0 +1,157 @@
+{% include 'organisation_header.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Organization Profile</title>
+
+    <style>
+        /* ===== Layout (footer at bottom) ===== */
+        html, body {
+            height: 100%;
+            margin: 0;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: linear-gradient(135deg, #eef7f1, #f9fbfa);
+        }
+
+        main {
+            flex: 1;
+            padding: 30px;
+        }
+
+        /* ===== Page Heading ===== */
+        .page-title {
+            text-align: center;
+            font-size: 24px;
+            font-weight: 600;
+            color: #1b5e20;
+            margin-bottom: 25px;
+            letter-spacing: 1px;
+        }
+
+        /* ===== Table Styling ===== */
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            background: #ffffff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+        }
+
+        th, td {
+            padding: 14px 12px;
+            text-align: center;
+            font-size: 14px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        th {
+            background: linear-gradient(135deg, #2e7d32, #43a047);
+            color: #ffffff;
+            font-weight: 600;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        tbody tr:hover {
+            background: #f1f8f4;
+        }
+
+        /* ===== Centered Edit Button ===== */
+        .edit-btn {
+            text-align: center;
+            margin-top: 25px;
+        }
+
+        .edit-btn button {
+            padding: 10px 22px;
+            background: linear-gradient(135deg, #2e7d32, #1b5e20);
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .edit-btn button:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        .edit-btn button a {
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        /* ===== Footer normal ===== */
+        #footer {
+            width: 100%;
+            margin-top: auto;
+            border-radius: 0 !important;
+            box-shadow: none !important;
+        }
+
+        #footer .container,
+        #footer .container-fluid {
+            max-width: 100% !important;
+            box-shadow: none !important;
+        }
+    </style>
+</head>
+
+<body>
+
+<main>
+
+    <div class="page-title">PROFILE</div>
+
+    <table>
+        <thead>
+            <tr>
+
+                <th>Organization_Name</th>
+                <th>Category</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Address</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+
+            <tr>
+
+              <td>{{ organisations.organisation_name }}</td>
+                <td>{{ organisations.category.category_name }}</td>
+                <td>{{ organisations.email}}</td>
+                <td>{{ organisations.phone}}</td>
+                <td>{{ organisations.address }}</td>
+                <td>{{ organisations.status}}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- EDIT BUTTON BELOW TABLE -->
+    <div class="edit-btn">
+        <button>
+            <a href="{% url 'organisation_managment' %}">Edit</a>
+        </button>
+    </div>
+
+</main>
+
+</body>
+</html>
+{% include 'organisation_footer.html' %}

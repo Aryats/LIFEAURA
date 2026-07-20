@@ -1,0 +1,176 @@
+
+
+
+
+
+{% include 'public_header.html' %}
+
+<style>
+    /* Custom styles for dropdown in dark theme */
+    select.form-control {
+        background-color: #2c3e50 !important;
+        color: white !important;
+        border: 1px solid #4a6572;
+    }
+
+    select.form-control option {
+        background-color: #2c3e50;
+        color: white;
+    }
+
+    select.form-control:focus {
+        background-color: #2c3e50;
+        color: white;
+        border-color: #ff9900;
+        box-shadow: 0 0 0 0.2rem rgba(255, 153, 0, 0.25);
+    }
+
+    /* Improve dropdown visibility on hover */
+    select.form-control option:hover,
+    select.form-control option:focus {
+        background-color: #ff9900 !important;
+        color: #000 !important;
+    }
+    /* Force dropdown styling */
+    select[name="category"] {
+        background-color: #2c3e50 !important;
+        color: white !important;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='white' stroke='white' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e") !important;
+        background-repeat: no-repeat !important;
+        background-position: right 0.75rem center !important;
+        background-size: 16px 12px !important;
+        border: 1px solid #4a6572 !important;
+    }
+
+    select[name="category"] option {
+        background: #2c3e50 !important;
+        color: white !important;
+        padding: 10px !important;
+    }
+
+    select[name="category"]:focus {
+        border-color: #ff9900 !important;
+        box-shadow: 0 0 0 0.2rem rgba(255, 153, 0, 0.25) !important;
+    }
+
+</style>
+
+<section class="section main-banner" id="top"
+         style=
+{#                 "#}
+{#            padding-top: 140px;#}
+{#            padding-bottom: 140px;#}
+{#            min-height: calc(100vh - 80px);#}
+{#         "#}
+>
+
+    <video autoplay muted loop id="bg-video">
+        <source src="/static/public/assets/images/blood.mp4" type="video/mp4" />
+    </video>
+
+    <div class="video-overlay header-text">
+        <div class="container d-flex justify-content-center">
+
+            <div class="login-box"
+                 style="
+                    background: rgba(22, 34, 57, 0.95);
+                    padding: 40px;
+                    border-radius: 12px;
+                    width: 750px;
+                    color: white;
+                    margin-top: 125px;
+                 ">
+
+                <h2 class="text-center mb-4">Organization Registration</h2>
+
+                {% if messages %}
+                    {% for message in messages %}
+                        <p class="text-warning text-center">{{ message }}</p>
+                    {% endfor %}
+                {% endif %}
+
+
+                <form method="POST">
+                    {% csrf_token %}
+
+                    <div class="row">
+
+                        <!-- LEFT COLUMN -->
+                        <div class="col-md-6">
+
+                            <div class="mb-3">
+                                <label class="form-label">Organisation Name</label>
+                                <input type="text" name="organisation_name"
+                                       class="form-control" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">Address</label>
+                                <input type="text" name="address"
+                                       class="form-control" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">Email</label>
+                                <input type="email" name="email"
+                                       class="form-control" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">Phone</label>
+                                <input type="text" name="phone"
+                                       class="form-control" required>
+                            </div>
+
+                        </div>
+
+                        <!-- RIGHT COLUMN -->
+                        <div class="col-md-6">
+
+                            <div class="mb-3">
+                                <label class="form-label">Organisation Category</label>
+                                <select name="category"
+                                        class="form-control"
+                                        required
+                                        style="background-color: #2c3e50; color: white;">
+                                    <option value="" disabled selected style="color: #aaa;">-- Select Category --</option>
+                                    {% for cat in categories %}
+                                        <option value="{{ cat.id }}" style="color: white; background-color: #2c3e50;">
+                                            {{ cat.category_name }}
+                                        </option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">Username</label>
+                                <input type="text" name="username"
+                                       class="form-control" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">Password</label>
+                                <input type="password" name="password"
+                                       class="form-control" required>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <button type="submit"
+                            class="btn btn-warning w-100 mt-3">
+                        Register
+                    </button>
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+{% include 'public_footer.html' %}

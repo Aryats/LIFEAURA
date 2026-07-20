@@ -1,0 +1,88 @@
+{#{% include 'admin_header.html' %}#}
+{##}
+{#<main class="main-wrapper">#}
+{#  <div class="container mt-5" style="max-width:600px;">#}
+{#    <div class="card shadow p-4">#}
+{#      <h3 class="text-center mb-4">Add Category</h3>#}
+{##}
+{#      <form method="POST">#}
+{#        {% csrf_token %}#}
+{##}
+{#        <div class="mb-3">#}
+{#          <label class="form-label">Category Name</label>#}
+{#          <input type="text" name="category_name" class="form-control" required>#}
+{#        </div>#}
+{##}
+{#        <div class="text-center">#}
+{#          <button type="submit" class="btn btn-dark">Add</button>#}
+{#        </div>#}
+{#      </form>#}
+{#    </div>#}
+{#  </div>#}
+{#</main>#}
+{##}
+{#{% include 'admin_footer.html' %}#}
+{% include 'admin_header.html' %}
+
+<style>
+  /* ===== Admin Add Category Styling ===== */
+
+  .admin-card {
+    border-radius: 12px;
+    border-top: 5px solid #f5a425;
+    background: #ffffff;
+  }
+
+  .admin-title {
+    color: #f5a425;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+  }
+
+  .form-label {
+    font-weight: 600;
+    color: #333;
+  }
+
+  .form-control:focus {
+    border-color: #f5a425;
+    box-shadow: 0 0 0 0.2rem rgba(245, 164, 37, 0.25);
+  }
+
+  .btn-gold {
+    background-color: #f5a425;
+    color: #ffffff;
+    font-weight: 600;
+    padding: 8px 30px;
+    border-radius: 6px;
+    border: none;
+  }
+
+  .btn-gold:hover {
+    background-color: #d18a1f;
+    color: #ffffff;
+  }
+</style>
+
+<main class="main-wrapper">
+  <div class="container mt-5" style="max-width:600px;">
+    <div class="card admin-card shadow p-4">
+      <h3 class="text-center mb-4 admin-title">Add Category</h3>
+
+      <form method="POST">
+        {% csrf_token %}
+
+        <div class="mb-3">
+          <label class="form-label">Category Name</label>
+          <input type="text" name="category_name" class="form-control" required>
+        </div>
+
+        <div class="text-center">
+          <button type="submit" class="btn btn-gold">Add</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</main>
+
+{% include 'admin_footer.html' %}

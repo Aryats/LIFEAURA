@@ -1,0 +1,330 @@
+{# this is the page where user send request to hospital #}
+{#{% include 'hospital_header.html' %}#}
+{#<!DOCTYPE html>#}
+{#<html lang="en">#}
+{#<head>#}
+{#    <meta charset="UTF-8">#}
+{#    <title>Donor List</title>#}
+{##}
+{##}
+{#    <style>#}
+{#        /* ===== Layout (footer at bottom) ===== */#}
+{#        html, body {#}
+{#            height: 100%;#}
+{#            margin: 0;#}
+{#        }#}
+{##}
+{#        body {#}
+{#            display: flex;#}
+{#            flex-direction: column;#}
+{#            font-family: "Segoe UI", Arial, sans-serif;#}
+{#            background: linear-gradient(135deg, #eef7f1, #f9fbfa);#}
+{#        }#}
+{##}
+{#        main {#}
+{#            flex: 1;#}
+{#            padding: 30px;#}
+{#        }#}
+{##}
+{#        /* ===== Page Heading ===== */#}
+{#        .page-title {#}
+{#            text-align: center;#}
+{#            font-size: 24px;#}
+{#            font-weight: 600;#}
+{#            color: #2e7d32;#}
+{#            margin-bottom: 25px;#}
+{#            letter-spacing: 1px;#}
+{#        }#}
+{##}
+{#        /* ===== Table Styling ===== */#}
+{#        table {#}
+{#            width: 100%;#}
+{#            border-collapse: separate;#}
+{#            border-spacing: 0;#}
+{#            background: #ffffff;#}
+{#            border-radius: 12px;#}
+{#            overflow: hidden;#}
+{#            box-shadow: 0 10px 25px rgba(0,0,0,0.08);#}
+{#        }#}
+{##}
+{#        th, td {#}
+{#            padding: 14px 12px;#}
+{#            text-align: center;#}
+{#            font-size: 14px;#}
+{#            border-bottom: 1px solid #e0e0e0;#}
+{#        }#}
+{##}
+{#        th {#}
+{#            background: linear-gradient(135deg, #2e7d32, #43a047);#}
+{#            color: #ffffff;#}
+{#            font-weight: 600;#}
+{#            letter-spacing: 0.3px;#}
+{#        }#}
+{##}
+{#        tr:last-child td {#}
+{#            border-bottom: none;#}
+{#        }#}
+{##}
+{#        tbody tr:hover {#}
+{#            background: #f1f8f4;#}
+{#            transition: background 0.3s;#}
+{#        }#}
+{##}
+{#        /* ===== Action Buttons ===== */#}
+{#        .btn {#}
+{#            font-size: 13px;#}
+{#            padding: 6px 12px;#}
+{#            margin: 2px;#}
+{#        }#}
+{##}
+{#        /* ===== Responsive ===== */#}
+{#        @media (max-width: 768px) {#}
+{#            main {#}
+{#                padding: 15px;#}
+{#            }#}
+{##}
+{#            th, td {#}
+{#                padding: 10px;#}
+{#                font-size: 13px;#}
+{#            }#}
+{#        }#}
+{##}
+{#        /* ===== Footer normal (no card look) ===== */#}
+{#        #footer {#}
+{#            width: 100%;#}
+{#            margin-top: auto;#}
+{#            border-radius: 0 !important;#}
+{#            box-shadow: none !important;#}
+{#        }#}
+{##}
+{#        #footer .container,#}
+{#        #footer .container-fluid {#}
+{#            max-width: 100% !important;#}
+{#            box-shadow: none !important;#}
+{#            border-radius: 0 !important;#}
+{#        }#}
+{#    </style>#}
+{#</head>#}
+{##}
+{#<body>#}
+{##}
+{#<main>#}
+{##}
+{#    <div class="page-title">DONOR LIST</div>#}
+{##}
+{#    <table>#}
+{#        <thead>#}
+{#            <tr>#}
+{#                <th>Sl.No</th>#}
+{#                <th>Name</th>#}
+{#                <th>Blood Group</th>#}
+{#                <th>Date</th>#}
+{#                <th>Action</th>#}
+{#            </tr>#}
+{#        </thead>#}
+{##}
+{#        <tbody>#}
+{#            <tr>#}
+{#                <td>1</td>#}
+{#                <td>Meenu</td>#}
+{#                <td>A Positive</td>#}
+{#                <td>Kannookadan</td>#}
+{#                <td>#}
+{#                    <button>Accept</button>#}
+{#                    <button>Reject</button>#}
+{#                </td>#}
+{#            </tr>#}
+{##}
+{#            <tr>#}
+{#                <td>2</td>#}
+{#                <td>Meenu</td>#}
+{#                <td>A Positive</td>#}
+{#                <td>Kannookadan</td>#}
+{#                <td>#}
+{#                    <button>Accept</button>#}
+{#                    <button >Reject</button>#}
+{#                </td>#}
+{#            </tr>#}
+{#        </tbody>#}
+{#    </table>#}
+{##}
+{#</main>#}
+{##}
+{#</body>#}
+{#</html>#}
+{#{% include 'hospital_footer.html' %}#}
+
+{# this is the page where user send request to hospital #}
+{% include 'hospital_header.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Donor List</title>
+
+    <style>
+        /* ===== Layout (footer at bottom) ===== */
+        html, body {
+            height: 100%;
+            margin: 0;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: linear-gradient(135deg, #eef7f1, #f9fbfa);
+        }
+
+        main {
+            flex: 1;
+            padding: 30px;
+        }
+
+        /* ===== Page Heading ===== */
+        .page-title {
+            text-align: center;
+            font-size: 24px;
+            font-weight: 600;
+            color: #2e7d32;
+            margin-bottom: 25px;
+            letter-spacing: 1px;
+        }
+
+        /* ===== Table Styling ===== */
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            background: #ffffff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+        }
+
+        th, td {
+            padding: 14px 12px;
+            text-align: center;
+            font-size: 14px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        th {
+            background: linear-gradient(135deg, #2e7d32, #43a047);
+            color: #ffffff;
+            font-weight: 600;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        tbody tr:hover {
+            background: #f1f8f4;
+            transition: background 0.3s;
+        }
+
+        /* ===== Custom Action Buttons ===== */
+        .action-btn {
+            padding: 6px 14px;
+            font-size: 13px;
+            font-weight: 600;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 2px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .accept-btn {
+            background: linear-gradient(135deg, #43a047, #2e7d32);
+            color: #ffffff;
+        }
+
+        .reject-btn {
+            background: linear-gradient(135deg, #e53935, #c62828);
+            color: #ffffff;
+        }
+
+        .action-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        /* ===== Responsive ===== */
+        @media (max-width: 768px) {
+            main {
+                padding: 15px;
+            }
+
+            th, td {
+                padding: 10px;
+                font-size: 13px;
+            }
+        }
+
+        /* ===== Footer normal (no card look) ===== */
+        #footer {
+            width: 100%;
+            margin-top: auto;
+            border-radius: 0 !important;
+            box-shadow: none !important;
+        }
+
+        #footer .container,
+        #footer .container-fluid {
+            max-width: 100% !important;
+            box-shadow: none !important;
+            border-radius: 0 !important;
+        }
+    </style>
+</head>
+
+<body>
+
+<main>
+
+    <div class="page-title">DONOR LIST</div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>No</th>
+                <th>Name</th>
+                <th>Blood Group</th>
+                <th>Date</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>Meenu</td>
+                <td>A Positive</td>
+                <td>Kannookadan</td>
+                <td>
+                    <button class="action-btn accept-btn">Accept</button>
+                    <button class="action-btn reject-btn">Reject</button>
+                </td>
+            </tr>
+
+            <tr>
+{#                <td>2</td>#}
+{#                <td>Meenu</td>#}
+{#                <td>A Positive</td>#}
+{#                <td>Kannookadan</td>#}
+{#                <td>#}
+{#                    <button class="action-btn accept-btn">Accept</button>#}
+{#                    <button class="action-btn reject-btn">Reject</button>#}
+{#                </td>#}
+            </tr>
+        </tbody>
+    </table>
+
+</main>
+
+</body>
+</html>
+{% include 'hospital_footer.html' %}
+

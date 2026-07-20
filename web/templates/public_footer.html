@@ -1,0 +1,59 @@
+<footer>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <p><i class="fa fa-copyright"></i> Copyright @LifeAura
+{##}
+{#           | Design: <a href="https://templatemo.com" rel="sponsored" target="_parent">TemplateMo</a><br>#}
+{#           Distributed By: <a href="https://themewagon.com" rel="sponsored" target="_blank">ThemeWagon</a>#}
+
+          </p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <!-- Bootstrap core JavaScript -->
+    <script src="/static/public/vendor/jquery/jquery.min.js"></script>
+    <script src="/static/public/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <script src="/static/public/assets/js/isotope.min.js"></script>
+    <script src="/static/public/assets/js/owl-carousel.js"></script>
+    <script src="/static/public/assets/js/lightbox.js"></script>
+    <script src="/static/public/assets/js/tabs.js"></script>
+    <script src="/static/public/assets/js/video.js"></script>
+    <script src="/static/public/assets/js/slick-slider.js"></script>
+    <script src="/static/public/assets/js/custom.js"></script>
+   <script>
+    // Keep the section checking for visual effects if needed
+    var checkSection = function checkSection() {
+      $('.section').each(function () {
+        var
+        $this = $(this),
+        topEdge = $this.offset().top - 80,
+        bottomEdge = topEdge + $this.height(),
+        wScroll = $(window).scrollTop();
+        if (topEdge < wScroll && bottomEdge > wScroll) {
+          var
+          currentId = $this.data('section'),
+          reqLink = $('a').filter('[href*=\\#' + currentId + ']');
+          reqLink.closest('li').addClass('active').
+          siblings().removeClass('active');
+        }
+      });
+    };
+
+    $(window).scroll(function () {
+      checkSection();
+    });
+
+    // REMOVED the click event handler that was preventing normal navigation
+    // All links will now work normally
+
+    $(document).ready(function() {
+        checkSection();
+    });
+</script>
+</body>
+</html>

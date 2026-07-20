@@ -1,0 +1,216 @@
+{#{% include 'admin_header.html' %}#}
+{#<main class="main-wrapper">#}
+{#  <div class="container mt-5" style="max-width: 700px;">#}
+{#    <div class="p-4 shadow rounded bg-light" style="margin: 0 auto;">#}
+{#      <h2 class="text-center mb-4">Add New Teacher</h2>#}
+{##}
+{#      <form action="" method="POST" enctype="multipart/form-data">#}
+{#        {% csrf_token %}#}
+{##}
+{#        <div class="row mb-3">#}
+{#          <div class="col-md-6">#}
+{#            <label for="name" class="form-label">Full Name</label>#}
+{#            <input type="text" name="name" id="name" class="form-control" required>#}
+{#          </div>#}
+{#          <div class="col-md-6">#}
+{#            <label for="dob" class="form-label">Date of Birth</label>#}
+{#            <input type="date" name="dob" id="dob" class="form-control" required>#}
+{#          </div>#}
+{#        </div>#}
+{##}
+{#        <div class="row mb-3">#}
+{#          <div class="col-md-6">#}
+{#            <label for="gender" class="form-label">Gender</label>#}
+{#            <select name="gender" id="gender" class="form-control" required>#}
+{#              <option value="">-- Select Gender --</option>#}
+{#              <option>Male</option>#}
+{#              <option>Female</option>#}
+{#              <option>Other</option>#}
+{#            </select>#}
+{#          </div>#}
+{#          <div class="col-md-6">#}
+{#            <label for="email" class="form-label">Email</label>#}
+{#            <input type="email" name="email" id="email" class="form-control" required>#}
+{#          </div>#}
+{#        </div>#}
+{##}
+{#        <div class="row mb-3">#}
+{#          <div class="col-md-6">#}
+{#            <label for="phone" class="form-label">Phone</label>#}
+{#            <input type="text" name="phone" id="phone" class="form-control" required>#}
+{#          </div>#}
+{#          <div class="col-md-6">#}
+{#            <label for="address" class="form-label">Address</label>#}
+{#            <input type="text" name="address" id="address" class="form-control" required>#}
+{#          </div>#}
+{#        </div>#}
+{##}
+{#        <div class="row mb-3">#}
+{#          <div class="col-md-6">#}
+{#            <label for="department" class="form-label">Department</label>#}
+{#            <input type="text" name="department" id="department" class="form-control" required>#}
+{#          </div>#}
+{#          <div class="col-md-6">#}
+{#            <label for="qualification" class="form-label">Qualification</label>#}
+{#            <input type="text" name="qualification" id="qualification" class="form-control" required>#}
+{#          </div>#}
+{#        </div>#}
+{##}
+{#        <div class="row mb-3">#}
+{#          <div class="col-md-6">#}
+{#            <label for="experience_years" class="form-label">Experience (Years)</label>#}
+{#            <input type="text" name="experience_years" id="experience_years" class="form-control" required>#}
+{#          </div>#}
+{#          <div class="col-md-6">#}
+{#            <label for="photo" class="form-label">Profile Photo</label>#}
+{#            <input type="file" name="photo" id="photo" class="form-control" accept="image/*" required>#}
+{#          </div>#}
+{#        </div>#}
+{##}
+{#        <div class="row mb-3">#}
+{#          <div class="col-md-6">#}
+{#            <label for="username" class="form-label">Username</label>#}
+{#            <input type="text" name="username" id="username" class="form-control" required>#}
+{#          </div>#}
+{#        </div>#}
+{##}
+{#        <div class="text-center mt-4">#}
+{#          <button type="submit" class="btn btn-primary px-5">Add Teacher</button>#}
+{#        </div>#}
+{#      </form>#}
+{#    </div>#}
+{#  </div>#}
+{#</main>#}
+{#{% include 'admin_footer.html' %}#}
+
+
+{% include 'admin_header.html' %}
+<main class="main-wrapper">
+  <div class="container mt-5" style="max-width: 700px;">
+    <div class="p-4 shadow rounded bg-light" style="margin: 0 auto;">
+      <h2 class="text-center mb-4">Add New Teacher</h2>
+
+      <form action="" method="POST" enctype="multipart/form-data" onsubmit="return validateForm()">
+        {% csrf_token %}
+
+        <div class="row mb-3">
+          <div class="col-md-6">
+            <label for="name" class="form-label">Full Name</label>
+            <input type="text" name="name" id="name" class="form-control" required>
+          </div>
+          <div class="col-md-6">
+            <label for="dob" class="form-label">Date of Birth</label>
+            <input type="date" name="dob" id="dob" class="form-control" required>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <div class="col-md-6">
+            <label for="gender" class="form-label">Gender</label>
+            <select name="gender" id="gender" class="form-control" required>
+              <option value="">-- Select Gender --</option>
+              <option>Male</option>
+              <option>Female</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="col-md-6">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" name="email" id="email" class="form-control" required>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <div class="col-md-6">
+            <label for="phone" class="form-label">Phone</label>
+            <input type="text" name="phone" id="phone" class="form-control" maxlength="10" required>
+          </div>
+          <div class="col-md-6">
+            <label for="address" class="form-label">Address</label>
+            <input type="text" name="address" id="address" class="form-control" required>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <div class="col-md-6">
+            <label for="department" class="form-label">Department</label>
+            <input type="text" name="department" id="department" class="form-control" required>
+          </div>
+          <div class="col-md-6">
+            <label for="qualification" class="form-label">Qualification</label>
+            <input type="text" name="qualification" id="qualification" class="form-control" required>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <div class="col-md-6">
+            <label for="experience_years" class="form-label">Experience (Years)</label>
+            <input type="number" name="experience_years" id="experience_years" class="form-control" min="0" required>
+          </div>
+          <div class="col-md-6">
+            <label for="photo" class="form-label">Profile Photo</label>
+            <input type="file" name="photo" id="photo" class="form-control" accept="image/*" required>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <div class="col-md-6">
+            <label for="username" class="form-label">Username</label>
+            <input type="text" name="username" id="username" class="form-control" required>
+          </div>
+        </div>
+
+        <div class="text-center mt-4">
+          <button type="submit" class="btn btn-primary px-5">Add Teacher</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</main>
+
+<script>
+  // Set max date for DOB (must be at least 20 years old)
+  document.addEventListener("DOMContentLoaded", () => {
+    const dobField = document.getElementById("dob");
+    const today = new Date();
+    const minAgeDate = new Date(today.getFullYear() - 20, today.getMonth(), today.getDate());
+    dobField.max = minAgeDate.toISOString().split("T")[0];
+  });
+
+  function validateForm() {
+    const phone = document.getElementById("phone").value.trim();
+    const username = document.getElementById("username").value.trim();
+    const dob = document.getElementById("dob").value;
+
+    // Phone validation
+    if (!/^\d{10}$/.test(phone)) {
+      alert("Phone number must be exactly 10 digits.");
+      return false;
+    }
+
+    // Username validation
+    if (username.length < 4) {
+      alert("Username must be at least 4 characters long.");
+      return false;
+    }
+
+    // DOB validation
+    const birthDate = new Date(dob);
+    const today = new Date();
+    const age = today.getFullYear() - birthDate.getFullYear();
+    const monthDiff = today.getMonth() - birthDate.getMonth();
+    const dayDiff = today.getDate() - birthDate.getDate();
+
+    if (
+      age < 20 ||
+      (age === 20 && (monthDiff < 0 || (monthDiff === 0 && dayDiff < 0)))
+    ) {
+      alert("Teacher must be at least 20 years old.");
+      return false;
+    }
+
+    return true; // allow form submission
+  }
+</script>
+
+{% include 'admin_footer.html' %}

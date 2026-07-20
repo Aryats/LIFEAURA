@@ -1,0 +1,111 @@
+{% include 'organisation_header.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Accepted Users</title>
+
+    <style>
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #f4f8f6;
+            margin: 0;
+            padding: 30px;
+        }
+
+        .page-title {
+            text-align: center;
+            font-size: 24px;
+            font-weight: 600;
+            color: #1b5e20;
+            margin-bottom: 25px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+        }
+
+        th, td {
+            padding: 14px 12px;
+            text-align: center;
+            font-size: 14px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        th {
+            background: #1b5e20;
+            color: white;
+        }
+
+        tr:hover {
+            background: #f1f8f4;
+        }
+
+        .chat-btn {
+            padding: 6px 14px;
+            background: #1565c0;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 13px;
+        }
+
+        .chat-btn:hover {
+            background: #1e88e5;
+        }
+
+        .no-data {
+            padding: 20px;
+            text-align: center;
+            color: #777;
+        }
+    </style>
+</head>
+<body>
+
+<div class="page-title">APPROVED FOR CHAT</div>
+
+{% if accepted_requests %}
+<table>
+    <thead>
+        <tr>
+            <th>Sl.No</th>
+            <th>User Name</th>
+            <th>Blood Group</th>
+            <th>Units</th>
+            <th>Accepted Date</th>
+            <th>Chat</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for req in accepted_requests %}
+        <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ req.sender.username }}</td>
+            <td>{{ req.blood_group }}</td>
+            <td>{{ req.units|default:"-" }}</td>
+            <td>{{ req.accepted_date|date:"d-m-Y h:i A" }}</td>
+            <td>
+                <a href="{% url 'org_chat' req.sender.id %}">
+                    <button class="chat-btn">Chat</button>
+                </a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<div class="no-data">
+    No accepted users available for chat.
+</div>
+{% endif %}
+
+</body>
+</html>
+{% include 'organisation_footer.html' %}

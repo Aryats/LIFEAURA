@@ -1,0 +1,183 @@
+{% include 'admin_header.html' %}
+
+<style>
+  .admin-page-title {
+    color: #f5a425;
+    font-weight: 700;
+    letter-spacing: 0.6px;
+  }
+
+  .admin-card {
+    background: #ffffff;
+    border-radius: 14px;
+    border-top: 5px solid #f5a425;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+    padding: 20px;
+  }
+
+  .admin-table {
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .admin-table thead {
+    background: linear-gradient(135deg, #f5a425, #d18a1f);
+    color: #ffffff;
+  }
+
+  .admin-table th {
+    font-weight: 600;
+    text-align: center;
+    font-size: 14px;
+    padding: 14px;
+  }
+
+  .admin-table td {
+    text-align: center;
+    vertical-align: middle;
+    font-size: 14px;
+    padding: 14px;
+  }
+
+  .admin-table tbody tr {
+    transition: background 0.3s, transform 0.2s;
+  }
+
+  .admin-table tbody tr:hover {
+    background: rgba(245, 164, 37, 0.08);
+    transform: scale(1.01);
+  }
+
+  .status-badge {
+    padding: 5px 10px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: capitalize;
+  }
+
+  .approved {
+    background-color: #d4edda;
+    color: #155724;
+  }
+
+  .pending {
+    background-color: #fff3cd;
+    color: #856404;
+  }
+
+  .rejected {
+    background-color: #f8d7da;
+    color: #721c24;
+  }
+
+  .points-earned {
+    font-weight: 700;
+    color: #2e7d32;
+  }
+
+  .empty-text {
+    font-weight: 600;
+    color: #777;
+    text-align: center;
+    padding: 20px;
+  }
+</style>
+
+<main class="main-wrapper">
+  <div class="container mt-4">
+
+    <h3 class="mb-4 text-center admin-page-title">
+      Donation Activities
+    </h3>
+
+    <div class="admin-card">
+      <div class="table-responsive admin-table">
+
+        <table class="table table-bordered mb-0">
+          <thead>
+            <tr>
+              <th>Sl.No</th>
+              <th>Sender</th>
+              <th>Receiver</th>
+              <th>Blood Group</th>
+              <th>Units</th>
+              <th>Required Date</th>
+              <th>Accepted Date</th>
+              <th>Status</th>
+              <th>Points Earned</th>
+            </tr>
+          </thead>
+
+          <tbody>
+
+            {% if donations %}
+
+              {% for donation in donations %}
+              <tr>
+
+                <td>{{ forloop.counter }}</td>
+
+                <td>{{ donation.sender }}</td>
+
+                <td>{{ donation.receiver }}</td>
+
+                <td>{{ donation.blood_group }}</td>
+
+                <td>
+                  {% if donation.units %}
+                    {{ donation.units }}
+                  {% else %}
+                    -
+                  {% endif %}
+                </td>
+
+                <td>
+                  {% if donation.required_date %}
+                    {{ donation.required_date|date:"d/m/Y" }}
+                  {% else %}
+                    -
+                  {% endif %}
+                </td>
+
+                <td>
+                  {% if donation.accepted_date %}
+                    {{ donation.accepted_date|date:"d/m/Y H:i" }}
+                  {% else %}
+                    -
+                  {% endif %}
+                </td>
+
+                <td>
+                  <span class="status-badge {{ donation.status }}">
+                    {{ donation.status }}
+                  </span>
+                </td>
+
+                <td class="points-earned">
+                  {{ donation.points }}
+                </td>
+
+              </tr>
+              {% endfor %}
+
+            {% else %}
+
+              <tr>
+                <td colspan="9" class="empty-text">
+                  No Donation Activities Found
+                </td>
+              </tr>
+
+            {% endif %}
+
+          </tbody>
+        </table>
+
+      </div>
+    </div>
+
+  </div>
+</main>
+
+{% include 'admin_footer.html' %}

@@ -1,0 +1,144 @@
+{% include 'admin_header.html' %}
+
+<style>
+  .admin-page-title {
+    color: #f5a425;
+    font-weight: 700;
+    letter-spacing: 0.6px;
+  }
+
+  .admin-card {
+    background: #ffffff;
+    border-radius: 14px;
+    border-top: 5px solid #f5a425;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+    padding: 20px;
+  }
+
+  .admin-table {
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .admin-table thead {
+    background: linear-gradient(135deg, #f5a425, #d18a1f);
+    color: #ffffff;
+  }
+
+  .admin-table th {
+    font-weight: 600;
+    text-align: center;
+    font-size: 14px;
+    padding: 14px;
+  }
+
+  .admin-table td {
+    text-align: center;
+    vertical-align: middle;
+    font-size: 14px;
+    padding: 14px;
+  }
+
+  .admin-table tbody tr {
+    transition: background 0.3s, transform 0.2s;
+  }
+
+  .admin-table tbody tr:hover {
+    background: rgba(245, 164, 37, 0.08);
+    transform: scale(1.01);
+  }
+
+  .profile-img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  .empty-text {
+    font-weight: 600;
+    color: #777;
+    text-align: center;
+    padding: 20px;
+  }
+</style>
+
+<main class="main-wrapper">
+  <div class="container mt-4">
+
+    <h3 class="mb-4 text-center admin-page-title">
+      Registered Users
+    </h3>
+
+    <div class="admin-card">
+      <div class="table-responsive admin-table">
+
+        <table class="table table-bordered mb-0">
+          <thead>
+            <tr>
+              <th>Sl.No</th>
+              <th>Profile</th>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Phone</th>
+              <th>Blood Group</th>
+              <th>Address</th>
+              <th>Reward Points</th>
+              <th>Health Score</th>
+              <th>Next Request Date</th>
+            </tr>
+          </thead>
+
+          <tbody>
+
+            {% if organizations %}
+
+              {% for user in organizations %}
+              <tr>
+                <td>{{ forloop.counter }}</td>
+
+                <td>
+                  {% if user.profile_picture %}
+                    <img src="{{ user.profile_picture.url }}" class="profile-img">
+                  {% else %}
+                    <img src="https://via.placeholder.com/50" class="profile-img">
+                  {% endif %}
+                </td>
+
+                <td>{{ user.name }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.phone }}</td>
+                <td>{{ user.blood_group }}</td>
+                <td>{{ user.address }}</td>
+                <td>{{ user.reward_points }}</td>
+                <td>{{ user.health_score }}</td>
+                <td>
+                  {% if user.next_request_allowed_date %}
+                    {{ user.next_request_allowed_date }}
+                  {% else %}
+                    -
+                  {% endif %}
+                </td>
+              </tr>
+              {% endfor %}
+
+            {% else %}
+
+              <tr>
+                <td colspan="10" class="empty-text">
+                  No Registered Users Found
+                </td>
+              </tr>
+
+            {% endif %}
+
+          </tbody>
+        </table>
+
+      </div>
+    </div>
+
+  </div>
+</main>
+
+{% include 'admin_footer.html' %}

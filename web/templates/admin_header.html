@@ -1,0 +1,863 @@
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health Care Admin - Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #3b82f6;
+            --primary-dark: #2563eb;
+            --secondary: #64748b;
+            --accent: #06b6d4;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --bg-main: #f8fafc;
+            --bg-secondary: #f1f5f9;
+            --card-bg: #ffffff;
+            --text-primary: #0f172a;
+            --text-secondary: #475569;
+            --text-muted: #94a3b8;
+            --border: #e2e8f0;
+            --sidebar-bg: #ffffff;
+            --hover-bg: #f1f5f9;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-main);
+            color: var(--text-primary);
+            min-height: 100vh;
+        }
+
+        /* TOP HORIZONTAL NAVBAR */
+        .top-navbar {
+            background: var(--card-bg);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            height: 65px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .navbar-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 2rem;
+            height: 100%;
+            max-width: 1800px;
+            margin: 0 auto;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .brand-icon {
+            width: 42px;
+            height: 42px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: white;
+        }
+
+        .brand-text h1 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .brand-text span {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .nav-center {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .nav-tab {
+            padding: 0.6rem 1.2rem;
+            color: var(--text-secondary);
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.2s;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .nav-tab:hover {
+            background: var(--hover-bg);
+            color: var(--text-primary);
+        }
+
+        .nav-tab.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .search-container {
+            position: relative;
+        }
+
+        .search-input {
+            background: var(--bg-main);
+            border: 1px solid var(--border);
+            padding: 0.5rem 1rem 0.5rem 2.5rem;
+            border-radius: 8px;
+            color: var(--text-primary);
+            width: 250px;
+            font-size: 0.9rem;
+        }
+
+        .search-input::placeholder {
+            color: var(--text-muted);
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 0.8rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .top-icon-btn {
+            width: 38px;
+            height: 38px;
+            background: var(--bg-main);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.2s;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .top-icon-btn:hover {
+            background: var(--hover-bg);
+            color: var(--primary);
+        }
+
+        .notify-dot {
+            position: absolute;
+            top: 6px;
+            right: 6px;
+            width: 8px;
+            height: 8px;
+            background: var(--danger);
+            border-radius: 50%;
+            border: 2px solid var(--card-bg);
+        }
+
+        .user-avatar {
+            width: 38px;
+            height: 38px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+
+        /* LEFT SIDEBAR */
+        .left-sidebar {
+            position: fixed;
+            left: 0;
+            top: 65px;
+            width: 260px;
+            height: calc(100vh - 65px);
+            background: var(--sidebar-bg);
+            border-right: 1px solid var(--border);
+            padding: 1.5rem 0;
+            overflow-y: auto;
+            z-index: 100;
+            transition: transform 0.3s;
+        }
+
+        .left-sidebar::-webkit-scrollbar {
+            width: 5px;
+        }
+
+        .left-sidebar::-webkit-scrollbar-thumb {
+            background: var(--border);
+            border-radius: 3px;
+        }
+
+        .left-sidebar::-webkit-scrollbar-thumb:hover {
+            background: var(--text-muted);
+        }
+
+        .sidebar-section {
+            margin-bottom: 1.5rem;
+            padding: 0 1rem;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            color: var(--text-muted);
+            font-weight: 600;
+            margin-bottom: 0.8rem;
+            padding: 0 0.5rem;
+        }
+
+        .menu-list {
+            list-style: none;
+        }
+
+        .menu-item {
+            margin-bottom: 0.3rem;
+        }
+
+        .menu-link {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 0.7rem 1rem;
+            color: var(--text-secondary);
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.2s;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .menu-link:hover {
+            background: var(--hover-bg);
+            color: var(--text-primary);
+        }
+
+        .menu-link.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        .menu-link i {
+            font-size: 1rem;
+            width: 20px;
+            text-align: center;
+        }
+
+        .menu-badge {
+            margin-left: auto;
+            background: var(--primary);
+            color: white;
+            font-size: 0.7rem;
+            padding: 0.15rem 0.5rem;
+            border-radius: 10px;
+            font-weight: 600;
+        }
+
+        .menu-link.active .menu-badge {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        /* MAIN CONTENT AREA */
+        .main-wrapper {
+            margin-top: 65px;
+            margin-left: 260px;
+            padding: 2rem;
+            min-height: calc(100vh - 65px);
+        }
+
+        .content-header {
+            margin-bottom: 2rem;
+        }
+
+        .page-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.3rem;
+        }
+
+        .page-subtitle {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        /* HERO BANNER */
+        .hero-banner {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            border-radius: 12px;
+            padding: 2.5rem;
+            color: white;
+            margin-bottom: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-banner::before {
+            content: '';
+            position: absolute;
+            width: 250px;
+            height: 250px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 50%;
+            top: -80px;
+            right: -80px;
+        }
+
+        .hero-banner::after {
+            content: '';
+            position: absolute;
+            width: 180px;
+            height: 180px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+            bottom: -60px;
+            left: -40px;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-content h2 {
+            font-size: 2rem;
+            margin-bottom: 0.8rem;
+            font-weight: 700;
+        }
+
+        .hero-content p {
+            font-size: 1rem;
+            opacity: 0.95;
+            margin-bottom: 1.5rem;
+            max-width: 600px;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 0.7rem 1.5rem;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.2s;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+
+        .btn-white {
+            background: white;
+            color: var(--primary);
+        }
+
+        .btn-white:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.5);
+        }
+
+        .btn-outline:hover {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: white;
+        }
+
+        /* STATS CARDS */
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-box {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 1.8rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+            transition: all 0.2s;
+            border: 1px solid var(--border);
+        }
+
+        .stat-box:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .stat-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+
+        .stat-info h3 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 0.3rem;
+            color: var(--text-primary);
+        }
+
+        .stat-info p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .stat-icon-box {
+            width: 54px;
+            height: 54px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+        }
+
+        .stat-icon-box.blue {
+            background: rgba(59, 130, 246, 0.1);
+            color: var(--primary);
+        }
+
+        .stat-icon-box.cyan {
+            background: rgba(6, 182, 212, 0.1);
+            color: var(--accent);
+        }
+
+        .stat-icon-box.green {
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--success);
+        }
+
+        .stat-icon-box.orange {
+            background: rgba(245, 158, 11, 0.1);
+            color: var(--warning);
+        }
+
+        .stat-footer {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border);
+            font-size: 0.85rem;
+        }
+
+        .trend-up {
+            color: var(--success);
+            font-weight: 600;
+        }
+
+        .trend-down {
+            color: var(--danger);
+            font-weight: 600;
+        }
+
+        /* MOBILE RESPONSIVE */
+        .mobile-menu-btn {
+            display: none;
+            background: var(--bg-main);
+            border: 1px solid var(--border);
+            color: var(--text-secondary);
+            width: 38px;
+            height: 38px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.1rem;
+        }
+
+        @media (max-width: 1024px) {
+            .main-wrapper {
+                margin-left: 0;
+            }
+
+            .left-sidebar {
+                transform: translateX(-100%);
+            }
+
+            .left-sidebar.active {
+                transform: translateX(0);
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .nav-center {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .search-container {
+                display: none;
+            }
+
+            .navbar-container {
+                padding: 0 1rem;
+            }
+
+            .main-wrapper {
+                padding: 1rem;
+            }
+
+            .hero-banner {
+                padding: 2rem;
+            }
+
+            .hero-content h2 {
+                font-size: 1.6rem;
+            }
+
+            .stats-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .overlay-bg {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            z-index: 99;
+        }
+
+        .overlay-bg.active {
+            display: block;
+        }
+        .admin-footer {
+            margin-left: var(--sidebar-width);
+            background: var(--bg-card);
+            border-top: 1px solid var(--border-light);
+            padding: 2rem;
+            transition: var(--transition);
+        }
+
+        .admin-footer.sidebar-collapsed {
+            margin-left: var(--sidebar-collapsed-width);
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .footer-text {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .footer-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--primary-green);
+        }
+
+/* Additional Sidebar Styling */
+.left-sidebar {
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+}
+
+.left-sidebar:hover {
+    box-shadow: 2px 0 15px rgba(0, 0, 0, 0.08);
+}
+
+.sidebar-section {
+    animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateX(-10px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+.menu-link {
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.menu-link::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 3px;
+    background: var(--primary);
+    transform: scaleY(0);
+    transition: transform 0.3s ease;
+}
+
+.menu-link:hover::before,
+.menu-link.active::before {
+    transform: scaleY(1);
+}
+
+.menu-link i {
+    transition: transform 0.3s ease;
+}
+
+.menu-link:hover i {
+    transform: scale(1.1);
+}
+
+.menu-badge {
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.menu-link.active .menu-badge {
+    box-shadow: 0 2px 8px rgba(255, 255, 255, 0.3);
+}
+
+.section-header {
+    transition: color 0.3s ease;
+}
+
+.section-header:hover {
+    color: var(--primary);
+}
+
+/* Sidebar scrollbar styling */
+.left-sidebar::-webkit-scrollbar-track {
+    background: var(--bg-main);
+    border-radius: 3px;
+}
+
+.left-sidebar::-webkit-scrollbar-thumb {
+    background: var(--primary);
+    border-radius: 3px;
+}
+
+.left-sidebar::-webkit-scrollbar-thumb:hover {
+    background: var(--primary-dark);
+}
+
+/* Mobile sidebar enhancements */
+@media (max-width: 1024px) {
+    .left-sidebar {
+        box-shadow: 2px 0 20px rgba(0, 0, 0, 0.15);
+    }
+}
+
+/* Add subtle hover effect to the entire sidebar */
+.left-sidebar::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.02) 0%, transparent 100%);
+    pointer-events: none;
+    z-index: -1;
+}
+
+/* ===== ONLY BRAND ICON GOLDEN ===== */
+.brand-icon {
+    background: linear-gradient(135deg, #f5a425, #d18a1f) !important;
+    color: #ffffff !important;
+}
+/* ===== Sidebar hover/active indicator → GOLDEN ===== */
+.menu-link::before {
+    background: #f5a425 !important;
+}
+
+
+    </style>
+</head>
+<body>
+    <!-- Overlay -->
+    <div class="overlay-bg" id="overlayBg"></div>
+
+    <!-- TOP HORIZONTAL NAVBAR -->
+    <nav class="top-navbar">
+        <div class="navbar-container">
+            <div class="brand">
+                <div class="brand-icon">
+                    <i class="fas fa-graduation-cap"></i>
+                </div>
+                <div class="brand-text">
+                    <h1>Health Care</h1>
+                    <span>Admin Dashboard</span>
+                </div>
+            </div>
+
+{#            <div class="nav-center">#}
+{#                <a href="#" class="nav-tab active">Dashboard</a>#}
+{#                <a href="#" class="nav-tab">Analytics</a>#}
+{#                <a href="#" class="nav-tab">Reports</a>#}
+{#                <a href="#" class="nav-tab">Settings</a>#}
+{#            </div>#}
+
+            <div class="nav-right">
+
+               <a href="{% url 'logout' %}">
+  <button class="top-icon-btn" style="color:#0b5ed7">
+    <i class="fas fa-sign-out-alt"></i>
+  </button>
+</a>
+
+            </div>
+        </div>
+    </nav>
+
+    <!-- LEFT SIDEBAR -->
+    <aside class="left-sidebar" id="leftSidebar">
+        <div class="sidebar-section">
+            <div class="section-header">
+                <i class="fas fa-user"></i>
+                <span>User Management</span>
+            </div>
+            <ul class="menu-list">
+                <li class="menu-item">
+                    <a href="/adminhome/" class="menu-link">
+                        <i class="fas fa-user-graduate"></i>
+                        <span>Home</span>
+{#                        <span class="menu-badge">156</span>#}
+                    </a>
+                </li>
+
+                <li class="menu-item">
+                    <a href="/admin_add_category/" class="menu-link">
+                        <i class="fas fa-chalkboard-teacher"></i>
+                        <span>Add category</span>
+{#                        <span class="menu-badge">24</span>#}
+                    </a>
+                </li>
+
+
+                 <li class="menu-item">
+                    <a href="/admin_view_categories/" class="menu-link">
+                        <i class="fas fa-chalkboard-teacher"></i>
+                        <span>View category</span>
+{#                        <span class="menu-badge">24</span>#}
+                    </a>
+                </li>
+
+                <li class="menu-item">
+                    <a href="/admin_view_registered_hospitals/" class="menu-link">
+                        <i class="fas fa-user-graduate"></i>
+                        <span>Verify hospitals</span>
+{#                        <span class="menu-badge">156</span>#}
+                    </a>
+                </li>
+
+                   <li class="menu-item">
+                    <a href="/admin_view_approved_hospitals/" class="menu-link">
+                        <i class="fas fa-user-graduate"></i>
+                        <span>Approved hospitals</span>
+{#                        <span class="menu-badge">156</span>#}
+                    </a>
+                </li>
+
+                <li class="menu-item">
+                    <a href="/admin_view_registered_organizations/" class="menu-link">
+                        <i class="fas fa-user-shield"></i>
+                        <span>Verify Organisations</span>
+                    </a>
+                </li>
+
+                <li class="menu-item">
+                    <a href="/admin_view_approved_organizations/" class="menu-link">
+                        <i class="fas fa-user-shield"></i>
+                        <span>Approved Organisations</span>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="/admin_view_registered_users/" class="menu-link">
+                        <i class="fas fa-exclamation-circle"></i>
+                        <span>View Users</span>
+                    </a>
+                </li>
+
+                 <li class="menu-item">
+                    <a href="/donation_activities/" class="menu-link">
+                        <i class="fas fa-exclamation-circle"></i>
+                        <span>Donation Activities</span>
+                    </a>
+                </li>
+
+                <li class="menu-item">
+                    <a href="/logout/" class="menu-link">
+                        <i class="fas fa-sign-out-alt"></i>
+                        <span>Logout</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+
+    </aside>

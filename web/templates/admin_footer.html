@@ -1,0 +1,41 @@
+<footer class="admin-footer" id="adminFooter">
+        <div class="footer-content">
+            <div class="footer-text">
+                © 2025 ClubConnect Admin Panel. All rights reserved.
+            </div>
+{#            <div class="footer-links">#}
+{#                <a href="/admin/help/">Help & Support</a>#}
+{#                <a href="/admin/documentation/">Documentation</a>#}
+{#                <a href="/admin/changelog/">Changelog</a>#}
+{#                <a href="/admin/system-info/">System Info</a>#}
+{#            </div>#}
+        </div>
+    </footer>
+
+    <script>
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const leftSidebar = document.getElementById('leftSidebar');
+        const overlayBg = document.getElementById('overlayBg');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            leftSidebar.classList.toggle('active');
+            overlayBg.classList.toggle('active');
+        });
+
+        overlayBg.addEventListener('click', () => {
+            leftSidebar.classList.remove('active');
+            overlayBg.classList.remove('active');
+        });
+
+        // Close sidebar on link click (mobile)
+        document.querySelectorAll('.menu-link').forEach(link => {
+            link.addEventListener('click', () => {
+                if (window.innerWidth <= 1024) {
+                    leftSidebar.classList.remove('active');
+                    overlayBg.classList.remove('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

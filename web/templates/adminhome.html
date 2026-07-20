@@ -1,0 +1,187 @@
+{# {% include 'admin_header.html' %}#}
+{##}
+{#  <main class="main-wrapper">#}
+{#        <div class="content-header">#}
+{#            <h1 class="page-title">Welcome Back, Administrator! 👋</h1>#}
+{#            <p class="page-subtitle">Manage your school clubs and events from one central hub</p>#}
+{#        </div>#}
+{##}
+{#        <div class="hero-banner">#}
+{#            <div class="hero-content">#}
+{#                <h2>Health Care Dashboard</h2>#}
+{#                <p>Streamline club management, track events, and engage your student community effectively.</p>#}
+{#                <div class="action-buttons">#}
+{#                    <button class="btn btn-white">#}
+{#                        <i class="fas fa-plus"></i>#}
+{#                        Create New Club#}
+{#                    </button>#}
+{#                    <button class="btn btn-outline">#}
+{#                        <i class="fas fa-calendar-plus"></i>#}
+{#                        Schedule Event#}
+{#                    </button>#}
+{#                    <button class="btn btn-outline">#}
+{#                        <i class="fas fa-chart-line"></i>#}
+{#                        View Reports#}
+{#                    </button>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+{##}
+{#    </main>#}
+{#{% include 'admin_footer.html' %}#}
+
+
+{% include 'admin_header.html' %}
+
+<style>
+    /* ===== ADMIN THEME OVERRIDE ===== */
+    :root {
+        --admin-gold: #f5a425;
+        --admin-gold-dark: #d48b1f;
+        --admin-bg: #ffffff;
+        --admin-soft: #fff6e6;
+        --admin-text: #333333;
+    }
+
+    body {
+        background: var(--admin-bg);
+        color: var(--admin-text);
+    }
+
+    /* ===== Page Header ===== */
+    .content-header {
+        margin-bottom: 25px;
+    }
+
+    .page-title {
+        font-weight: 700;
+        color: var(--admin-gold-dark);
+    }
+
+    .page-subtitle {
+        color: #666;
+    }
+
+    /* ===== Hero Banner ===== */
+    .hero-banner {
+        background: linear-gradient(
+            135deg,
+            var(--admin-gold),
+            var(--admin-gold-dark)
+        );
+        border-radius: 14px;
+        padding: 40px;
+        color: #ffffff;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+    }
+
+    .hero-content h2 {
+        font-weight: 700;
+        margin-bottom: 10px;
+    }
+
+    .hero-content p {
+        opacity: 0.95;
+        margin-bottom: 25px;
+    }
+
+    /* ===== Buttons ===== */
+    .btn {
+        border-radius: 8px;
+        font-weight: 600;
+        padding: 10px 18px;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .btn-white {
+        background: #ffffff;
+        color: var(--admin-gold-dark);
+        border: none;
+    }
+
+    .btn-white:hover {
+        background: var(--admin-soft);
+        color: var(--admin-gold-dark);
+    }
+
+    .btn-outline {
+        background: transparent;
+        border: 2px solid #ffffff;
+        color: #ffffff;
+    }
+
+    .btn-outline:hover {
+        background: #ffffff;
+        color: var(--admin-gold-dark);
+    }
+
+    /* ===== Main Wrapper ===== */
+    .main-wrapper {
+        padding: 30px;
+    }
+
+    /* ===== Footer NORMAL ===== */
+    #footer {
+        background: #ffffff;
+        border-radius: 0 !important;
+        box-shadow: none !important;
+    }
+
+    #footer .container,
+    #footer .container-fluid {
+        max-width: 100% !important;
+        box-shadow: none !important;
+        border-radius: 0 !important;
+    }
+</style>
+
+<main class="main-wrapper">
+    <div class="content-header">
+        <h1 class="page-title">Welcome Back, Administrator! 👋</h1>
+        <p class="page-subtitle">
+            Manage your healthcare platform from one central control panel
+        </p>
+    </div>
+
+    <div class="hero-banner">
+        <div class="hero-content">
+            <h2>Health Care Admin Dashboard</h2>
+            <p>
+                Monitor users, approve hospitals and organizations, and manage the system efficiently.
+            </p>
+
+            <div class="action-buttons">
+{#                <button class="btn btn-white">#}
+{#                    <i class="fas fa-user-check"></i>#}
+{#                    Approve Requests#}
+{#                </button>#}
+                       <button class="btn btn-white">
+                    <a href="/admin_add_category/" class="btn btn-white">
+                        <i class="fas fa-user-check"></i>
+                        <span>Add Category</span>
+{#                        <span class="menu-badge">24</span>#}
+                    </a>
+                </button>
+
+                   <button class="btn btn-white">
+                    <a href="/admin_view_registered_hospitals/" class="btn btn-white">
+                        <i class="fas fa-chalkboard-teacher"></i>
+                        <span>Manage Hospital</span>
+{#                        <span class="menu-badge">24</span>#}
+                    </a>
+                </button>
+             <button class="btn btn-white">
+                    <a href="/admin_view_registered_organizations/" class="btn btn-white">
+                        <i class="fas fa-chalkboard-teacher"></i>
+                        <span>Manage Organisations</span>
+{#                        <span class="menu-badge">24</span>#}
+                    </a>
+                </button>
+            </div>
+        </div>
+    </div>
+</main>
+
+{% include 'admin_footer.html' %}

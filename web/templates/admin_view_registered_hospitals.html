@@ -1,0 +1,237 @@
+{#{% include 'admin_header.html' %}#}
+{##}
+{#<main class="main-wrapper">#}
+{#  <div class="container mt-4">#}
+{#    <h3 class="mb-4">Registered Hospitals</h3>#}
+{##}
+{#    <table class="table table-bordered table-hover">#}
+{#      <thead class="table-dark">#}
+{#        <tr>#}
+{#          <th>#</th>#}
+{#          <th>Name</th>#}
+{#          <th>Email</th>#}
+{#          <th>Phone</th>#}
+{#          <th>Address</th>#}
+{#          <th>Status</th>#}
+{#          <th>Action</th>#}
+{#        </tr>#}
+{#      </thead>#}
+{#      <tbody>#}
+{#        {% for h in hospitals %}#}
+{#        <tr>#}
+{#          <td>{{ forloop.counter }}</td>#}
+{#          <td>{{ h.hospital_name }}</td>#}
+{#          <td>{{ h.email }}</td>#}
+{#          <td>{{ h.phone }}</td>#}
+{#          <td>{{ h.address }}</td>#}
+{#          <td>{{ h.status }}</td>#}
+{#          <td>#}
+{#            {% if h.status == 'pending' %}#}
+{#              <a href="{% url 'admin_approve_hospital' h.id %}" class="btn btn-success ">Approve</a><br>#}
+{#              <a href="{% url 'admin_reject_hospital' h.id %}" class="btn btn-danger">Reject</a>#}
+{#             {% else %}#}
+{#                completed#}
+{#            {% endif %}#}
+{#          </td>#}
+{#        </tr>#}
+{#        {% empty %}#}
+{#        <tr>#}
+{#          <td colspan="6" class="text-center">No hospitals found</td>#}
+{#        </tr>#}
+{#        {% endfor %}#}
+{#      </tbody>#}
+{#    </table>#}
+{#  </div>#}
+{#</main>#}
+{##}
+{#{% include 'admin_footer.html' %}#}
+{% include 'admin_header.html' %}
+
+<style>
+  /* ===============================
+     ADMIN – REGISTERED HOSPITALS
+     GOLDEN PREMIUM STYLING
+     =============================== */
+
+  .admin-page-title {
+    color: #f5a425;
+    font-weight: 700;
+    letter-spacing: 0.6px;
+  }
+
+  /* Card wrapper */
+  .admin-card {
+    background: #ffffff;
+    border-radius: 14px;
+    border-top: 5px solid #f5a425;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+    padding: 20px;
+  }
+
+  /* Table */
+  .admin-table {
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .admin-table thead {
+    background: linear-gradient(135deg, #f5a425, #d18a1f);
+    color: #ffffff;
+  }
+
+  .admin-table th {
+    font-weight: 600;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 14px;
+    padding: 14px;
+  }
+
+  .admin-table td {
+    text-align: center;
+    vertical-align: middle;
+    font-size: 14px;
+    padding: 14px;
+  }
+
+  .admin-table tbody tr {
+    transition: background 0.3s, transform 0.2s;
+  }
+
+  .admin-table tbody tr:hover {
+    background: rgba(245, 164, 37, 0.08);
+    transform: scale(1.003);
+  }
+
+  /* Status badges */
+  .status-badge {
+    padding: 5px 14px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    display: inline-block;
+  }
+
+  .status-pending {
+    background: rgba(245, 164, 37, 0.2);
+    color: #d18a1f;
+  }
+
+  .status-approved {
+    background: rgba(40, 167, 69, 0.15);
+    color: #2e7d32;
+  }
+
+  /* Action buttons */
+  .action-btn {
+    width: 95px;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 6px 0;
+    border-radius: 20px;
+    margin-bottom: 6px;
+  }
+
+  .btn-approve {
+    background: #2e7d32;
+    color: #ffffff;
+    border: none;
+  }
+
+  .btn-approve:hover {
+    background: #1b5e20;
+    color: #ffffff;
+  }
+
+  .btn-reject {
+    background: #c62828;
+    color: #ffffff;
+    border: none;
+  }
+
+  .btn-reject:hover {
+    background: #b71c1c;
+    color: #ffffff;
+  }
+
+  .completed-text {
+    font-weight: 600;
+    color: #6c757d;
+  }
+
+  /* Empty state */
+  .empty-text {
+    font-weight: 600;
+    color: #777;
+  }
+</style>
+
+<main class="main-wrapper">
+  <div class="container mt-4">
+
+    <h3 class="mb-4 text-center admin-page-title">
+      Registered Hospitals
+    </h3>
+
+    <div class="admin-card">
+
+      <div class="table-responsive admin-table">
+        <table class="table table-bordered mb-0">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Phone</th>
+              <th>Address</th>
+              <th>Status</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            {% for h in hospitals %}
+            <tr>
+              <td>{{ forloop.counter }}</td>
+              <td>{{ h.hospital_name }}</td>
+              <td>{{ h.email }}</td>
+              <td>{{ h.phone }}</td>
+              <td>{{ h.address }}</td>
+              <td>
+                {% if h.status == 'pending' %}
+                  <span class="status-badge status-pending">Pending</span>
+                {% else %}
+                  <span class="status-badge status-approved">Approved</span>
+                {% endif %}
+              </td>
+              <td>
+                {% if h.status == 'pending' %}
+                  <a href="{% url 'admin_approve_hospital' h.id %}"
+                     class="btn btn-approve action-btn">
+                     Approve
+                  </a><br>
+                  <a href="{% url 'admin_reject_hospital' h.id %}"
+                     class="btn btn-reject action-btn">
+                     Reject
+                  </a>
+                {% else %}
+                  <span class="completed-text">Completed</span>
+                {% endif %}
+              </td>
+            </tr>
+            {% empty %}
+            <tr>
+              <td colspan="7" class="text-center empty-text">
+                No hospitals found
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </div>
+</main>
+
+{% include 'admin_footer.html' %}

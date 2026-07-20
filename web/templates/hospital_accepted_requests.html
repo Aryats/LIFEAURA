@@ -1,0 +1,145 @@
+{% include 'hospital_header.html' %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Accepted Donors</title>
+
+    <style>
+
+        html, body {
+            height: 100%;
+            margin: 0;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: linear-gradient(135deg, #eef7f1, #f9fbfa);
+        }
+
+        main {
+            flex: 1;
+            padding: 30px;
+        }
+
+        .page-title {
+            text-align: center;
+            font-size: 24px;
+            font-weight: 600;
+            color: #2e7d32;
+            margin-bottom: 25px;
+            letter-spacing: 1px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            background: #ffffff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+        }
+
+        th, td {
+            padding: 14px 12px;
+            text-align: center;
+            font-size: 14px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        th {
+            background: linear-gradient(135deg, #2e7d32, #43a047);
+            color: #ffffff;
+            font-weight: 600;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        tbody tr:hover {
+            background: #f1f8f4;
+        }
+
+        .chat-btn {
+            padding: 6px 16px;
+            font-size: 13px;
+            font-weight: 600;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            background: linear-gradient(135deg, #1e88e5, #1565c0);
+            color: #ffffff;
+            transition: 0.2s;
+        }
+
+        .chat-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+    </style>
+</head>
+
+<body>
+
+<main>
+
+    <div class="page-title">
+        ACCEPTED DONORS - {{ organization.organisation_name }}
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Sl.No</th>
+                <th>Donor Name</th>
+                <th>Blood Group</th>
+                <th>Units</th>
+                <th>Required Date</th>
+                <th>Accepted Date</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+        {% if requests %}
+
+            {% for req in requests %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ req.sender.username }}</td>
+                <td>{{ req.blood_group }}</td>
+                <td>{{ req.units }}</td>
+                <td>{{ req.required_date }}</td>
+                <td>{{ req.accepted_date }}</td>
+                <td>
+                    <a href="{% url 'hospital_chat' req.sender.id %}">
+                        <button class="chat-btn">Chat</button>
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+
+        {% else %}
+
+            <tr>
+                <td colspan="7">No Accepted Requests Found</td>
+            </tr>
+
+        {% endif %}
+
+        </tbody>
+
+    </table>
+
+</main>
+
+</body>
+</html>
+
+{% include 'hospital_footer.html' %}

@@ -1,0 +1,148 @@
+{% include 'organisation_header.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Organization</title>
+
+    <style>
+        /* ===== Page Layout ===== */
+        html, body {
+            height: 100%;
+            margin: 0;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #f4f8f6;
+        }
+
+        main {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+        }
+
+        /* ===== Form Card (Beautiful but Simple) ===== */
+        .container {
+            width: 420px;
+            background: #ffffff;
+            padding: 32px;
+            border-radius: 10px;
+            border-top: 6px solid #1b5e20;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 24px;
+            color: #1b5e20;
+            font-weight: 600;
+        }
+
+        label {
+            display: block;
+            margin-top: 14px;
+            font-size: 14px;
+            color: #333;
+            font-weight: 500;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-top: 6px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            font-size: 14px;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #2e7d32;
+            background: #f9fff9;
+        }
+
+        button {
+            width: 100%;
+            margin-top: 26px;
+            padding: 12px;
+            background: #1b5e20;
+            color: #ffffff;
+            border: none;
+            border-radius: 6px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #2e7d32;
+        }
+
+        /* ===== Footer NORMAL (not card) ===== */
+        #footer {
+            width: 100%;
+            margin-top: auto;
+            background: #ffffff;
+            border-radius: 0 !important;
+            box-shadow: none !important;
+        }
+
+        #footer .container,
+        #footer .container-fluid {
+            max-width: 100% !important;
+            border-radius: 0 !important;
+            box-shadow: none !important;
+        }
+
+        /* ===== Responsive ===== */
+        @media (max-width: 480px) {
+            .container {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<main>
+
+    <div class="container">
+        <h2>Organisation Profile</h2>
+
+
+
+    <form method="post">
+        {% csrf_token %}
+
+        <label>Organisation Name</label>
+        <input type="text" name="organisation_name" value="{{organisations.organisation_name}}" required>
+
+        <label>Category</label>
+        <input type="text" name="category" value="{{organisations.category.category_name}}" required>
+        <label>Email</label>
+        <input type="email" name="email" value="{{ organisations.email }}" required>
+
+        <label>Phone</label>
+        <input type="text" name="phone" value="{{organisations.phone }}" required>
+
+        <label>Address</label>
+        <input type="text" name="address" value="{{organisations.address }}" required>
+
+        <button type="submit">Update Profile</button>
+    </form>
+
+
+    </div>
+
+</main>
+
+</body>
+</html>
+{% include 'organisation_footer.html' %}

@@ -1,0 +1,58 @@
+{% include 'admin_header.html' %}
+
+<main class="main-wrapper">
+  <div class="container mt-5">
+    <h2 class="text-center mb-4">All Students</h2>
+
+    {% if messages %}
+      {% for message in messages %}
+        <div class="alert alert-success text-center">{{ message }}</div>
+      {% endfor %}
+    {% endif %}
+
+    <table class="table table-striped table-bordered text-center align-middle shadow">
+      <thead class="table-dark">
+        <tr>
+          <th>Photo</th>
+          <th>Name</th>
+          <th>Age</th>
+          <th>Gender</th>
+          <th>Email</th>
+          <th>Phone</th>
+          <th>Department</th>
+          <th>Batch</th>
+          <th>Teacher</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for s in student %}
+        <tr>
+          <td>
+            {% if s.photo %}
+              <img src="{{ s.photo.url }}" alt="photo" width="60" height="60" class="rounded-circle">
+            {% else %}
+              <img src="/static/images/default-avatar.png" alt="photo" width="60" height="60" class="rounded-circle">
+            {% endif %}
+          </td>
+          <td>{{ s.name }}</td>
+          <td>{{ s.age }}</td>
+          <td>{{ s.gender }}</td>
+          <td>{{ s.email }}</td>
+          <td>{{ s.phone }}</td>
+          <td>{{ s.department }}</td>
+          <td>{{ s.batch }}</td>
+          <td>{{ s.TEACHER.name }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+          <td colspan="10" class="text-center">No students found.</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+
+  </div>
+</main>
+
+{% include 'admin_footer.html' %}

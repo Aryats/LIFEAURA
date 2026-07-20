@@ -1,0 +1,158 @@
+{% include 'hospital_header.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Profile</title>
+
+    <style>
+        /* ===== Layout fix for footer ===== */
+        html, body {
+            height: 100%;
+            margin: 0;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: linear-gradient(135deg, #eef7f1, #f9fbfa);
+        }
+
+        main {
+            flex: 1;
+            padding: 30px;
+        }
+
+        /* ===== Profile Heading ===== */
+        .page-title {
+            text-align: center;
+            font-size: 24px;
+            font-weight: 600;
+            color: #2e7d32;
+            margin-bottom: 25px;
+            letter-spacing: 1px;
+        }
+
+        /* ===== Table Styling ===== */
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            background: #ffffff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+        }
+
+        th, td {
+            padding: 14px 12px;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        th {
+            background: linear-gradient(135deg, #2e7d32, #43a047);
+            color: #ffffff;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+        }
+
+        td {
+            border-bottom: 1px solid #e0e0e0;
+            color: #333;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        tbody tr:hover {
+            background: #f1f8f4;
+            transition: background 0.3s;
+        }
+
+        /* ===== Button Styling ===== */
+        .edit-btn {
+            margin-top: 25px;
+            text-align: center;
+        }
+
+        button {
+            padding: 10px 22px;
+            background: linear-gradient(135deg, #43a047, #2e7d32);
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+        }
+
+        button a {
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        /* ===== Responsive ===== */
+        @media (max-width: 768px) {
+            main {
+                padding: 15px;
+            }
+
+            th, td {
+                padding: 10px;
+                font-size: 13px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<main>
+
+    <div class="page-title">PROFILE</div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Address</th>
+                <th>Status</th>
+
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr>
+
+              <td>{{ hospitals.hospital_name }}</td>
+                <td>{{ hospitals.email}}</td>
+                <td>{{ hospitals.phone}}</td>
+                <td>{{ hospitals.address }}</td>
+                <td>{{ hospitals.status}}</td>
+            </tr>
+
+        </tbody>
+    </table>
+
+    <div class="edit-btn">
+        <button>
+            <a href="{% url 'hospital_managment' %}">Edit</a>
+        </button>
+    </div>
+
+</main>
+
+</body>
+</html>
+{% include 'hospital_footer.html' %}
